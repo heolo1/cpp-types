@@ -15,9 +15,12 @@ $(foreach NAME,$(SRC),$(eval $(call ADD_DEPENDENCY,$(NAME))))
 all: main
 
 main: ${SRC:%=$(BF)%.o}
-	$(CXX) $(CXXFLAGS) ${SRC:%=$(BF)%.o} -o main
+	$(CXX) $(CXXFLAGS) ${SRC:%=$(BF)%.o} -o main.out
 
 .PHONY: clean run
 
 clean:
 	- find . | perl -nle "print if /\.(o|d)\W/ and not /\/\./" | xargs rm
+
+run: main
+	./main.out
